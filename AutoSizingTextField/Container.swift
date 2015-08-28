@@ -9,38 +9,45 @@
 import Foundation
 import UIKit
 
-class Container : UIView {
+class Container : UIView, SizingTextViewDelegate {
     
-    let textView: UITextView
-   
+    var textView: UITextView?
+    
     required override init(frame: CGRect) {
         
-        textView = AutoSizingTextView()
-        
         super.init(frame: frame)
+        
+        textView = AutoSizingTextView(sizingDelegate: self)
+        
         self.backgroundColor = UIColor(red: 193/255, green: 225/255, blue: 238/255, alpha: 1.0)
         
-        textView.textColor = UIColor.blackColor()
-        textView.backgroundColor = UIColor.whiteColor()
-        textView.font = UIFont.systemFontOfSize(15)
-        
-        addSubview(textView)
-        textView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        
-        addConstraints([
-            NSLayoutConstraint(item: textView, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1, constant: 10),
-            NSLayoutConstraint(item: textView, attribute: .Bottom, relatedBy: .Equal, toItem: self, attribute: .Bottom, multiplier: 1, constant: -10)
-            ])
-        
-        addConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat( "H:|-(padding)-[field]-(padding)-|",
-                options: nil,
-                metrics: ["padding" : 15],
-                views: ["field" : textView]))
+        if let textView = textView {
+            textView.textColor = UIColor.blackColor()
+            textView.backgroundColor = UIColor.whiteColor()
+            textView.font = UIFont.systemFontOfSize(15)
+            
+            addSubview(textView)
+            textView.setTranslatesAutoresizingMaskIntoConstraints(false)
+            
+            addConstraints([
+                NSLayoutConstraint(item: textView, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1, constant: 10),
+                NSLayoutConstraint(item: textView, attribute: .Bottom, relatedBy: .Equal, toItem: self, attribute: .Bottom, multiplier: 1, constant: -10)
+                ])
+            
+            addConstraints(
+                NSLayoutConstraint.constraintsWithVisualFormat( "H:|-(padding)-[field]-(padding)-|",
+                    options: nil,
+                    metrics: ["padding" : 15],
+                    views: ["field" : textView]))
+        }
 
     }
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func isChangingSize(textView: UITextView) {
+        println("changing")
     }
 }

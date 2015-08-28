@@ -9,9 +9,16 @@
 import Foundation
 import UIKit
 
+protocol SizingTextViewDelegate {
+    func isChangingSize(textView: UITextView)
+}
+
 class AutoSizingTextView: UITextView, UITextViewDelegate {
     
-    init() {
+    let sizingDelegate: SizingTextViewDelegate
+    
+    init(sizingDelegate: SizingTextViewDelegate) {
+        self.sizingDelegate = sizingDelegate
         super.init(frame: CGRectZero, textContainer: nil)
         self.delegate = self
         self.scrollEnabled = false
@@ -21,14 +28,25 @@ class AutoSizingTextView: UITextView, UITextViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func calcSize() -> CGSize {
+        return self.sizeThatFits(CGSize(width: self.bounds.width, height: CGFloat.max))
+    }
+    
     override func intrinsicContentSize() -> CGSize {
-        
-        let newSize = self.sizeThatFits(CGSize(width: CGFloat.max, height: CGFloat.max))
-        println(newSize)
-        return newSize
+        return calcSize()
     }
     
     func textViewDidChange(textView: UITextView) {
-        textView.sizeToFit()
+        sizingDelegate.isChangingSize(textView)
+        
+        let newSize = calcSize()
+        
+        if newSize.height > 100 {
+            self.scrollEnabled = true
+        } else {
+            self.scrollEnabled = false
+        }
+        
+        self.updateConstraints()
     }
 }

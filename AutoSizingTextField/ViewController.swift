@@ -21,12 +21,14 @@ class ViewController: UIViewController {
         view.addSubview(footer)
         
         // Vertical
+        /*
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
             "V:[footerView(footerHeight)]",
             options: nil,
             metrics: ["footerHeight" : 50],
             views: ["footerView" : footer])
         )
+        */
         
         bottomConstraint = NSLayoutConstraint(item: footer, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: 0)
         if let bottomConstraint = bottomConstraint {
@@ -48,10 +50,11 @@ class ViewController: UIViewController {
             name: UIKeyboardWillHideNotification,
             object: nil)
         
-        let hideKeyboardTapGesture = UITapGestureRecognizer(target: footer.textView, action: "resignFirstResponder")
-        self.view.addGestureRecognizer(hideKeyboardTapGesture)
-        hideKeyboardTapGesture.cancelsTouchesInView = false
-        
+        if let textView = footer.textView {
+            let hideKeyboardTapGesture = UITapGestureRecognizer(target: textView, action: "resignFirstResponder")
+            self.view.addGestureRecognizer(hideKeyboardTapGesture)
+            hideKeyboardTapGesture.cancelsTouchesInView = false
+        }
     }
     
     func keyboardShowing(notification: NSNotification) {
@@ -67,12 +70,6 @@ class ViewController: UIViewController {
         self.bottomConstraint?.constant = 0
         self.view.layoutIfNeeded()
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
 }
 
