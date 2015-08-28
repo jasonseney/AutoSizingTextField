@@ -48,7 +48,7 @@ class ViewController: UIViewController {
             name: UIKeyboardWillHideNotification,
             object: nil)
         
-        let hideKeyboardTapGesture = UITapGestureRecognizer(target: footer.textField, action: "resignFirstResponder")
+        let hideKeyboardTapGesture = UITapGestureRecognizer(target: footer.textView, action: "resignFirstResponder")
         self.view.addGestureRecognizer(hideKeyboardTapGesture)
         hideKeyboardTapGesture.cancelsTouchesInView = false
         

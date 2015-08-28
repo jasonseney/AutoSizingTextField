@@ -14,6 +14,8 @@
 		DC7F26E51B8FDB9B00D6DBA4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC7F26E31B8FDB9B00D6DBA4 /* LaunchScreen.xib */; };
 		DC7F26F11B8FDB9B00D6DBA4 /* AutoSizingTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F26F01B8FDB9B00D6DBA4 /* AutoSizingTextFieldTests.swift */; };
 		DC7F26FB1B8FDC8E00D6DBA4 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F26FA1B8FDC8E00D6DBA4 /* Container.swift */; };
+		DC926B051B90C207006D42E1 /* AutoSizingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC926B041B90C207006D42E1 /* AutoSizingTextView.swift */; };
+		DC926B061B90C315006D42E1 /* AutoSizingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC926B041B90C207006D42E1 /* AutoSizingTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,7 @@
 		DC7F26EF1B8FDB9B00D6DBA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC7F26F01B8FDB9B00D6DBA4 /* AutoSizingTextFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSizingTextFieldTests.swift; sourceTree = "<group>"; };
 		DC7F26FA1B8FDC8E00D6DBA4 /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		DC926B041B90C207006D42E1 /* AutoSizingTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSizingTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,7 @@
 				DC7F26E11B8FDB9B00D6DBA4 /* Images.xcassets */,
 				DC7F26E31B8FDB9B00D6DBA4 /* LaunchScreen.xib */,
 				DC7F26D81B8FDB9B00D6DBA4 /* Supporting Files */,
+				DC926B041B90C207006D42E1 /* AutoSizingTextView.swift */,
 			);
 			path = AutoSizingTextField;
 			sourceTree = "<group>";
@@ -217,6 +221,7 @@
 			files = (
 				DC7F26DD1B8FDB9B00D6DBA4 /* ViewController.swift in Sources */,
 				DC7F26FB1B8FDC8E00D6DBA4 /* Container.swift in Sources */,
+				DC926B051B90C207006D42E1 /* AutoSizingTextView.swift in Sources */,
 				DC7F26DB1B8FDB9B00D6DBA4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC926B061B90C315006D42E1 /* AutoSizingTextView.swift in Sources */,
 				DC7F26F11B8FDB9B00D6DBA4 /* AutoSizingTextFieldTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
