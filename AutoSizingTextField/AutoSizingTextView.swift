@@ -9,17 +9,21 @@
 import Foundation
 import UIKit
 
-protocol SizingTextViewDelegate {
-    func isChangingSize(textView: UITextView)
+protocol AutoSizingTextViewDelegate {
+    func didChangeHeight(height: CGFloat)
 }
 
 class AutoSizingTextView: UITextView, UITextViewDelegate {
     
-    let sizingDelegate: SizingTextViewDelegate
+    let sizingDelegate: AutoSizingTextViewDelegate
+    let maxHeight: CGFloat
     
-    init(sizingDelegate: SizingTextViewDelegate) {
+    init(maxHeight: CGFloat, sizingDelegate: AutoSizingTextViewDelegate) {
         self.sizingDelegate = sizingDelegate
+        self.maxHeight = maxHeight
+        
         super.init(frame: CGRectZero, textContainer: nil)
+        
         self.delegate = self
         self.scrollEnabled = false
     }
@@ -37,16 +41,21 @@ class AutoSizingTextView: UITextView, UITextViewDelegate {
     }
     
     func textViewDidChange(textView: UITextView) {
-        sizingDelegate.isChangingSize(textView)
         
         let newSize = calcSize()
         
-        if newSize.height > 100 {
+        if newSize.height > self.maxHeight {
             self.scrollEnabled = true
         } else {
             self.scrollEnabled = false
         }
         
+        let oldHeight = self.frame.height
+        
         self.updateConstraints()
+        
+        if oldHeight != newSize.height {
+            sizingDelegate.didChangeHeight(newSize.height)
+        }
     }
 }

@@ -16,19 +16,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let footer = Container()
+        footer.backgroundColor = UIColor(red: 193/255, green: 225/255, blue: 238/255, alpha: 1.0)
         footer.setTranslatesAutoresizingMaskIntoConstraints(false)
         
         view.addSubview(footer)
-        
-        // Vertical
-        /*
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:[footerView(footerHeight)]",
-            options: nil,
-            metrics: ["footerHeight" : 50],
-            views: ["footerView" : footer])
-        )
-        */
         
         bottomConstraint = NSLayoutConstraint(item: footer, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: 0)
         if let bottomConstraint = bottomConstraint {

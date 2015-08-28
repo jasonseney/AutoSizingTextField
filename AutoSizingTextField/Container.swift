@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Container : UIView, SizingTextViewDelegate {
+class Container : UIView, AutoSizingTextViewDelegate {
     
     var textView: UITextView?
     
@@ -17,9 +17,7 @@ class Container : UIView, SizingTextViewDelegate {
         
         super.init(frame: frame)
         
-        textView = AutoSizingTextView(sizingDelegate: self)
-        
-        self.backgroundColor = UIColor(red: 193/255, green: 225/255, blue: 238/255, alpha: 1.0)
+        textView = AutoSizingTextView(maxHeight: 80, sizingDelegate: self)
         
         if let textView = textView {
             textView.textColor = UIColor.blackColor()
@@ -40,14 +38,13 @@ class Container : UIView, SizingTextViewDelegate {
                     metrics: ["padding" : 15],
                     views: ["field" : textView]))
         }
-
     }
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func isChangingSize(textView: UITextView) {
-        println("changing")
+    func didChangeHeight(height: CGFloat) {
+        println("Changing height to: " + height.description)
     }
 }
