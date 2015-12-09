@@ -10,18 +10,22 @@ import Foundation
 import UIKit
 
 /**
-*  A delegate to handle specific functionality related to the resizing of a text view.
-*/
+ *  A delegate to handle specific functionality related to the resizing of a text view.
+ */
 protocol AutoSizingTextViewDelegate : UITextViewDelegate {
     /**
-    Handle a change in an auto sizing text view's height
-    
-    :param: changeInHeight The number of points the height changed. (Positive if growing, negative if shrinking)
-    */
+     Handle a change in an auto sizing text view's height
+     
+     :param: changeInHeight The number of points the height changed. (Positive if growing, negative if shrinking)
+     */
     func didChangeHeight(changeInHeight: CGFloat)
 }
 
-class AutoSizingTextView: UITextView, UITextViewDelegate {
+/**
+ * A specialized version of TMTextView that will dynamically increase and decrease
+ * in height depending on space that the text taks up (multiple lines).
+ */
+final class AutoSizingTextView: TMTextView, TMTextViewDelegate {
     
     // An optional delegate used to handle specific resizing actions
     private weak var sizingDelegate: AutoSizingTextViewDelegate?
@@ -33,13 +37,13 @@ class AutoSizingTextView: UITextView, UITextViewDelegate {
     static private let defaultMaxHeight = CGFloat(100)
     
     /**
-    Creates a new instance of an auto sizing text view
-    
-    :param: maxHeight      The max height to grow to, afterwhich the text view scrolls. Defaults to 100.
-    :param: sizingDelegate An optional delegate to
-    
-    :returns: A new instance of an auto sizing text view
-    */
+     Creates a new instance of an auto sizing text view
+     
+     :param: maxHeight      The max height to grow to, afterwhich the text view scrolls. Defaults to 100.
+     :param: sizingDelegate An optional delegate to
+     
+     :returns: A new instance of an auto sizing text view
+     */
     init(maxHeight: CGFloat = AutoSizingTextView.defaultMaxHeight, sizingDelegate: AutoSizingTextViewDelegate?) {
         self.sizingDelegate = sizingDelegate
         self.maxHeight = maxHeight
@@ -55,11 +59,11 @@ class AutoSizingTextView: UITextView, UITextViewDelegate {
     }
     
     /**
-    Calculates the size that fits all the text based on the
-    current width of this view.
-    
-    :returns: The width and height that can fit all the text
-    */
+     Calculates the size that fits all the text based on the
+     current width of this view.
+     
+     :returns: The width and height that can fit all the text
+     */
     private func calcSize() -> CGSize {
         let fittedSize = sizeThatFits(CGSize(width: self.bounds.width, height: maxHeight))
         
@@ -84,7 +88,7 @@ class AutoSizingTextView: UITextView, UITextViewDelegate {
     
     func textViewDidChange(textView: UITextView) {
         
-        var newHeight = calcSize().height
+        let newHeight = calcSize().height
         let oldHeight = self.frame.height
         
         // When we've maxed out, turn scrolling on
@@ -102,5 +106,4 @@ class AutoSizingTextView: UITextView, UITextViewDelegate {
             sizingDelegate?.didChangeHeight(changeInHeight)
         }
     }
-
 }

@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         
         let footer = Container()
         footer.backgroundColor = UIColor(red: 193/255, green: 225/255, blue: 238/255, alpha: 1.0)
-        footer.setTranslatesAutoresizingMaskIntoConstraints(false)
+        footer.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(footer)
         
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
     
     func keyboardShowing(notification: NSNotification) {
         let userInfo = notification.userInfo
-        let keyboardFrame = userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue()
+        let keyboardFrame = userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue
         if let height = keyboardFrame?.size.height {
             self.bottomConstraint?.constant = -height
             self.view.layoutIfNeeded()
